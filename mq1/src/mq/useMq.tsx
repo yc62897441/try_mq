@@ -1,17 +1,23 @@
-import { useEffect, useRef } from 'react'
-
-import { initMqtt } from './init'
+import { initMqtt, disconnect } from './init'
+import { useMqttStore } from '../store'
 
 function useMq() {
-    const isInit = useRef(false)
+    const isConnect = useMqttStore((state) => state.isConnect)
+    const setIsConnect = useMqttStore((state) => state.setIsConnect)
 
-    useEffect(() => {
-        if (isInit.current) return
+    function connectMqtt() {
+        if (isConnect) return
         initMqtt()
-        isInit.current = true
-    }, [])
+        setIsConnect(true)
+    }
 
-    return
+    function disconnectMqtt() {
+        if (!isConnect) return
+        disconnect()
+        setIsConnect(false)
+    }
+
+    return { connectMqtt, disconnectMqtt }
 }
 
 export default useMq

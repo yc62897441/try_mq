@@ -17,9 +17,6 @@ importers:
       react-dom:
         specifier: 18.3.1
         version: 18.3.1(react@18.3.1)
-      zustand:
-        specifier: ^4.5.5
-        version: 4.5.5(@types/react@18.2.43)(react@18.3.1)
     devDependencies:
       '@types/node':
         specifier: 22.1.0
@@ -982,11 +979,6 @@ packages:
     peerDependencies:
       browserslist: '>= 4.21.0'
 
-  use-sync-external-store@1.2.2:
-    resolution: {integrity: sha512-PElTlVMwpblvbNqQ82d2n6RjStvdSoNe9FG28kNfz3WiXilJm4DdNkEzRhCZuIDwY8U08WVihhGR5iRqAwfDiw==}
-    peerDependencies:
-      react: ^16.8.0 || ^17.0.0 || ^18.0.0
-
   util-deprecate@1.0.2:
     resolution: {integrity: sha512-EPD5q1uXyFxJpCrLnCc1nHnq3gOa6DZBocAIiI2TaSCA7VCJ1UJDMagCzIkXNsUYfD1daK//LTEQ8xiIbrHtcw==}
 
@@ -1049,21 +1041,6 @@ packages:
 
   yallist@3.1.1:
     resolution: {integrity: sha512-a4UGQaWPH59mOXUYnAG2ewncQS4i4F43Tv3JoAM+s2VDAmS9NsK8GpDMLrCHPksFT7h3K6TOoUNn2pb7RoXx4g==}
-
-  zustand@4.5.5:
-    resolution: {integrity: sha512-+0PALYNJNgK6hldkgDq2vLrw5f6g/jCInz52n9RTpropGgeAf/ioFUCdtsjCqu4gNhW9D01rUQBROoRjdzyn2Q==}
-    engines: {node: '>=12.7.0'}
-    peerDependencies:
-      '@types/react': '>=16.8'
-      immer: '>=9.0.6'
-      react: '>=16.8'
-    peerDependenciesMeta:
-      '@types/react':
-        optional: true
-      immer:
-        optional: true
-      react:
-        optional: true
 
 snapshots:
 
@@ -1990,10 +1967,6 @@ snapshots:
       escalade: 3.1.2
       picocolors: 1.0.1
 
-  use-sync-external-store@1.2.2(react@18.3.1):
-    dependencies:
-      react: 18.3.1
-
   util-deprecate@1.0.2: {}
 
   vite-plugin-html@3.2.2(vite@5.4.0(@types/node@22.1.0)(sass@1.69.7)(terser@5.31.5)):
@@ -2045,10 +2018,3 @@ snapshots:
   ws@8.18.0: {}
 
   yallist@3.1.1: {}
-
-  zustand@4.5.5(@types/react@18.2.43)(react@18.3.1):
-    dependencies:
-      use-sync-external-store: 1.2.2(react@18.3.1)
-    optionalDependencies:
-      '@types/react': 18.2.43
-      react: 18.3.1

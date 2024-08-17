@@ -5,42 +5,12 @@ import style from './app.module.scss'
 import '../style/cssreset.css'
 import '../style/global.css'
 
-import useMq from './mq/useMq'
-
-import { sendMessage, topic, subscribeMq, unsubscribeMq, disconnectMq } from './mq/init'
+import DevelopConsoleBoard from './components/DevelopConsoleBoard'
 
 function App() {
-    useMq()
-
-    function handleSendMessage() {
-        sendMessage(topic, 'hello')
-    }
-
-    function handleSubscribeMq() {
-        console.log('handleSubscribeMq')
-        subscribeMq(topic)
-    }
-
-    function handleUnsubscribeMq() {
-        console.log('handleUnsubscribeMq')
-        unsubscribeMq(topic)
-    }
-
     return (
         <main className={style.app}>
-            App
-            <div>
-                <button onClick={handleSendMessage}>sendMessage</button>
-            </div>
-            <div>
-                <button onClick={handleSubscribeMq}>subscribeMq</button>
-            </div>
-            <div>
-                <button onClick={handleUnsubscribeMq}>unsubscribeMq</button>
-            </div>
-            <div>
-                <button onClick={disconnectMq}>disconnectMq</button>
-            </div>
+            <DevelopConsoleBoard />
         </main>
     )
 }
