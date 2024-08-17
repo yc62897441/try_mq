@@ -2,26 +2,53 @@ import React from 'react'
 
 import style from './developConsoleBoard.module.scss'
 
-import { sendMessage, topic, subscribeMq, unsubscribeMq } from '../mq/init'
+import { sendMessage, subscribeMq, unsubscribeMq } from '../mq/init'
 
 import useMq from '../mq/useMq'
 
-// TODO: 向後端取得 topic 列表
-// TODO: 訂閱 topic 才可以對該 topic 發送訊息，如果沒有訂閱則不能發送訊息
+import { apiPath, fetcher } from '../api'
+
+import { useMqttStore } from '../store'
 
 function DevelopConsoleBoard() {
-    const { connectMqtt, disconnectMqtt } = useMq()
+    const { topicList, addTopicToList } = useMqttStore((state) => state)
+    const { checkIsConnect, connectMqtt, disconnectMqtt } = useMq()
 
     function handleSendMessage() {
+        if (!checkIsConnect()) return
+
+        const topic = topicList[0]
+        if (!topic) {
+            console.log('尚未訂閱主題')
+            return
+        }
+
+        // TODO: 如果沒有訂閱這個主題，則不能發話
         sendMessage(topic, '小明說hello')
     }
 
-    function handleSubscribeMq() {
-        console.log('handleSubscribeMq')
-        subscribeMq(topic)
+    async function handleSubscribeMq() {
+        if (!checkIsConnect()) return
+
+        try {
+            const data = await fetcher(apiPath)
+            const topic = data.topic
+            console.log('handleSubscribeMq')
+            subscribeMq(topic)
+            addTopicToList(topic)
+        } catch (error) {
+            console.error(error)
+        }
     }
 
     function handleUnsubscribeMq() {
+        if (!checkIsConnect()) return
+
+        const topic = topicList[0]
+        if (!topic) {
+            console.log('尚未訂閱主題')
+            return
+        }
         console.log('handleUnsubscribeMq')
         unsubscribeMq(topic)
     }

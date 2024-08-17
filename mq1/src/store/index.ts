@@ -21,6 +21,7 @@ const createMqttStore: StateCreator<UseMqttStoreType> = (set) => ({
         set(() => ({
             topicList: list,
         })),
+    // TODO: 避免加入重複的 topic
     addTopicToList: (topic) =>
         set((state) => ({
             topicList: [...state.topicList, topic],

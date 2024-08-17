@@ -17,7 +17,15 @@ function useMq() {
         setIsConnect(false)
     }
 
-    return { connectMqtt, disconnectMqtt }
+    function checkIsConnect() {
+        if (!isConnect) {
+            console.log('尚未建立連線')
+            return false
+        }
+        return true
+    }
+
+    return { checkIsConnect, connectMqtt, disconnectMqtt }
 }
 
 export default useMq
