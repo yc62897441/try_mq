@@ -26,6 +26,7 @@ httpServer.listen(wsPort, function () {
     console.log(`MQTT broker is running on WebSocket port ${wsPort}`)
 })
 
+// TODO: 記錄 clientId 並且記錄其 topic
 // TODO: 轉發 topic 給另一個客戶端
 // ======================================
 // 使用 Express 建立 HTTP 伺服器來處理其他 HTTP 請求

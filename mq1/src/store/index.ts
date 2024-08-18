@@ -1,5 +1,7 @@
 import { create, StateCreator } from 'zustand'
 
+import { chatStore } from './chat'
+
 type UseMqttStoreType = {
     isConnect: boolean
     setIsConnect: (value: boolean) => void
@@ -55,4 +57,5 @@ const createMqttStore: StateCreator<UseMqttStoreType> = (set) => ({
             topicList: state.topicList.filter((item) => item !== topic),
         })),
 })
+
 export const useMqttStore = create<UseMqttStoreType>(createMqttStore)

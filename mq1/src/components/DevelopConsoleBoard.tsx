@@ -11,9 +11,6 @@ import { apiPath, fetcher } from '../api'
 import { useMqttStore } from '../store'
 
 function DevelopConsoleBoard() {
-    const state = useMqttStore((state) => state)
-    console.log('state', state)
-
     const { topicList, addTopicToList, removeTopicFromList } = useMqttStore((state) => state)
     const { checkIsConnect, connectMqtt, disconnectMqtt } = useMq()
 
