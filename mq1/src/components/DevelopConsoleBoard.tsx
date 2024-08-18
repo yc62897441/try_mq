@@ -11,19 +11,19 @@ import { apiPath, fetcher } from '../api'
 import { useMqttStore } from '../store'
 
 function DevelopConsoleBoard() {
-    const { topicList, addTopicToList } = useMqttStore((state) => state)
+    const { topicList, addTopicToList, removeTopicFromList } = useMqttStore((state) => state)
     const { checkIsConnect, connectMqtt, disconnectMqtt } = useMq()
 
+    // TODO: 之後 topic 改為函數傳入的參數
     function handleSendMessage() {
         if (!checkIsConnect()) return
 
         const topic = topicList[0]
         if (!topic) {
-            console.log('尚未訂閱主題')
+            console.log('目前未訂閱主題')
             return
         }
 
-        // TODO: 如果沒有訂閱這個主題，則不能發話
         sendMessage(topic, '小明說hello')
     }
 
@@ -41,16 +41,18 @@ function DevelopConsoleBoard() {
         }
     }
 
+    // TODO: 之後 topic 改為函數傳入的參數
     function handleUnsubscribeMq() {
         if (!checkIsConnect()) return
 
         const topic = topicList[0]
         if (!topic) {
-            console.log('尚未訂閱主題')
+            console.log('目前未訂閱主題')
             return
         }
         console.log('handleUnsubscribeMq')
         unsubscribeMq(topic)
+        removeTopicFromList(topic)
     }
 
     return (
