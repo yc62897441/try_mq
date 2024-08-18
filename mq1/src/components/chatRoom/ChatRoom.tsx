@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import style from './chatRoom.module.scss'
 
@@ -12,10 +12,31 @@ type ChatRoomPropsType = {
 
 function ChatRoom({ isOpen, setIsOpen }: ChatRoomPropsType) {
     const user = userStore((state) => state)
-    const { chatMsgList } = chatStore((state) => state)
+    const { chatMsgList, addChat } = chatStore((state) => state)
+
+    const [message, setMessage] = useState('')
 
     function closeChatRoom() {
         setIsOpen(false)
+    }
+
+    function handleChange(value: string) {
+        setMessage(value)
+    }
+
+    function handleKeyDown(e: React.KeyboardEvent<HTMLInputElement>) {
+        if (e.key === 'Enter') handleSubmit()
+    }
+
+    // TODO: 連接 mqtt
+    function handleSubmit() {
+        if (message === '') return
+        const newChatMsg = {
+            content: message,
+            sender: user.name,
+        }
+        addChat(newChatMsg)
+        setMessage('')
     }
 
     return (
@@ -30,6 +51,12 @@ function ChatRoom({ isOpen, setIsOpen }: ChatRoomPropsType) {
                         </div>
                     ))}
             </div>
+
+            <div className={style.chatRoomFooter}>
+                <input onChange={(e) => handleChange(e.target.value)} onKeyDown={(e) => handleKeyDown(e)} value={message}></input>
+                <button onClick={handleSubmit}>Submit</button>
+            </div>
+
             <button onClick={closeChatRoom}>關閉聊天室</button>
         </section>
     )

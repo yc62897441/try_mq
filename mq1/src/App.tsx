@@ -10,6 +10,14 @@ import { chatStore } from './store/chat'
 import ChatRoom from './components/chatRoom/ChatRoom'
 import DevelopConsoleBoard from './components/DevelopConsoleBoard'
 
+// const colorMap = {
+//     '#F1F2F4': '#F1F2F4',
+//     '#222222': '#222222',
+//     '#B3B3B4': '#B3B3B4',
+//     '#5A5453': '#5A5453',
+//     '#E89B19': '#E89B19',
+// }
+
 const tempChatList = [
     {
         content: 'aaa aaaaaa aaaaaa aaaaaaaaaaaa aaa aaaaaaaaa aaaaaa aaa aaa aaaaaa',
